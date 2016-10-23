@@ -1,15 +1,27 @@
 package dev.challenge.api.to;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+
 /**
  * Transfer Object for Direct routes.
  *
  * @author MFULAWKA
  */
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = As.PROPERTY, property = "type")
+@JsonSubTypes({ @Type(value = DirectRouteTo.class, name = "object") })
 public class DirectRouteTo {
+  @JsonProperty(required = true)
   private int dep_sid;
 
+  @JsonProperty(required = true)
   private int arr_sid;
 
+  @JsonProperty(required = true)
   private boolean direct_bus_route;
 
   /**
